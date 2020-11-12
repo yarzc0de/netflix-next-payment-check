@@ -41,7 +41,7 @@ const readline = require("readline-sync");
                     }
                 })
             } else {
-                console.log("[!] Login Failed : "+res.message);
+                console.log("[!] Error : "+res.message);
             }
         })
         console.log("")
