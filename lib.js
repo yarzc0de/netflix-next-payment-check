@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-
+// by YarzCode
 class Library {
     constructor() {
         this.browserConfig = {"headless" : true}
