@@ -28,7 +28,7 @@ class Library {
                 let isLoggedIn = await this.page.$eval("#appMountPoint > div > div > div:nth-child(1) > div.bd.dark-background > div.profiles-gate-container > div > span > a", (res) => {
                     return res.innerText;
                 })
-                if(isLoggedIn.includes("PROFILES") == true) {
+                if(isLoggedIn.includes("PROFIL") == true) {
                     return {error: false, "message": "Login Success"};
                 } else {
                     return {error: true, "message": "IDK Error something went wrong #1"}
@@ -44,7 +44,18 @@ class Library {
                         return {error: true, "message": "IDK Error Something went wrong #2"};
                     }
                 } catch(error) {
-                    return {error: true, "message": "IDK Error Something went wrong #3"};
+                    try {
+                        let isPaused = await this.page.$eval("#appMountPoint > div > div > div.simpleContainer > div > form > div.confirmFormContainer > div:nth-child(1) > div.messageContainer > div > div.nf-message-contents", (res) => {
+                            return res.innerText;
+                        })
+                        if(isPaused.includes("paused") === true) {
+                            return {error: true, "message": isPaused}
+                        } else {
+                            return {error: true, "message": "IDK Error Something went wrong #3"};
+                        }
+                    } catch(error) {
+                        return {error: true, "message": "IDK Error Something went wrong #4"};
+                    }
                 }
             }
         }
