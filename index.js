@@ -2,7 +2,7 @@ const library = require("./lib");
 const lib = new library();
 const fs = require("async-file");
 const readline = require("readline-sync");
-// by YarzCode - @ahyarsetiawan34
+// by YarzCode - IG @ahyarsetiawan34
 
 (async () => {
     let accountList = await readline.question("Account's List? ");
