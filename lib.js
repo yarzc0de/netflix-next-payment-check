@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-// by YarzCode
+
 class Library {
     constructor() {
         this.browserConfig = {"headless" : true}
@@ -34,7 +34,18 @@ class Library {
                     return {error: true, "message": "IDK Error something went wrong #1"}
                 }
             } catch(error) {
-                return {error: true, "message": "IDK Error something went wrong"};
+                try {
+                    let needNewMethod = await this.page.$eval("#appMountPoint > div > div > div.simpleContainer > div > div.planContainer > div.stepHeader-container > div > h1", (res) => {
+                        return res.innerText;
+                    });
+                    if(needNewMethod.includes("Selamat datang kembali") == true || needNewMethod.includes("Welcome back") == true) {
+                        return {error: true, "message": "Need New Payment Method!"}
+                    } else {
+                        return {error: true, "message": "IDK Error Something went wrong #2"};
+                    }
+                } catch(error) {
+                    return {error: true, "message": "IDK Error Something went wrong #3"};
+                }
             }
         }
     }
